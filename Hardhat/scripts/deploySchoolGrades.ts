@@ -14,11 +14,11 @@ async function main() {
   // await hre.run('compile');
 
   // We get the contract to deploy
-  const Contract = await ethers.getContractFactory("SmartContract2");
+  const Contract = await ethers.getContractFactory("SchoolGrades");
   const contract = await Contract.deploy();
   await contract.deployed();
 
-  console.log("Contract 2 deployed to:", contract.address);
+  console.log("Contract School Grades deployed to:", contract.address);
 
 }
 
