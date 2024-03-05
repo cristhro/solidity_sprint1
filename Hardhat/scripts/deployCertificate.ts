@@ -11,7 +11,6 @@ async function main() {
   await contract.deployed();
 
   console.log("Contract SchoolCertificate deployed to:", contract.address);
-
 }
 
 // We recommend this pattern to be able to use async/await everywhere
