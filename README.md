@@ -1,3 +1,27 @@
+#### Deployment School Certificate
+```sh
+npx hardhat clean
+npx hardhat compile
+npx hardhat run ./scripts/deploySchoolCertificate.ts --network ethereum_sepolia_testnet
+```
+
+```sh
+Contract SchoolCertificate deployed to: 0x7cAC1d2Ff482Cf98804B3355Ea4A65f74aA4eDC2
+```
+
+#### Validar School Certificate
+```sh
+Hardhat % npx hardhat verify --network ethereum_sepolia_testnet 0x7cAC1d2Ff482Cf98804B3355Ea4A65f74aA4eDC2
+```
+
+```sh
+Successfully submitted source code for contract
+contracts/SchoolCertificate.sol:SchoolCertificate at 0x7cAC1d2Ff482Cf98804B3355Ea4A65f74aA4eDC2
+for verification on the block explorer. Waiting for verification result...
+
+Successfully verified contract SchoolCertificate on Etherscan.
+https://sepolia.etherscan.io/address/0x7cAC1d2Ff482Cf98804B3355Ea4A65f74aA4eDC2#code
+```
 
 
 
