@@ -1,21 +1,17 @@
-graph LR
-A(Estudiante)
 
-A --> B(Ver mis notas)
-A --> C(Solicitar diploma)
+#Casos de uso para estudiante:
 
-B(Ver mis notas)
-B --> D(SchoolGrades)
-D --> B(Mostrar notas)
+Ver mis notas: El estudiante puede ver sus notas en el contrato SchoolGrades.
+Solicitar diploma: El estudiante puede solicitar un diploma al contrato Diploma.
+Verifica elegibilidad: El contrato Diploma verifica con el contrato SchoolGrades si el estudiante es elegible para obtener un título.
+Otorga diploma: Si el estudiante es elegible, el contrato Diploma le otorga un título.
+Mostrar diploma: El estudiante puede ver su diploma en el contrato Diploma.
 
-C(Solicitar diploma)
-C --> E(Diploma)
-E --> F(Verifica elegibilidad)
-F --> E(Otorga diploma)
-E --> C(Mostrar diploma)
+#Casos de uso para escuela/universidad:
 
-D(SchoolGrades)
+Agregar notas: La escuela puede agregar notas al contrato SchoolGrades.
 
-E(Diploma)
+#Casos de uso para gestor de diplomas:
 
-
+Verifica elegibilidad: El contrato Diploma verifica con el contrato SchoolGrades si el estudiante es elegible para obtener un título.
+Otorga diploma: Si el estudiante es elegible, el contrato Diploma le otorga un título.
