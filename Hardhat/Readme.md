@@ -9,12 +9,13 @@ npm install
 ```sh
 npx hardhat clean
 npx hardhat compile
-npx hardhat run ./scripts/deploy.ts --network DESIRED_NETWORK
+npx hardhat run ./scripts/deploySchoolCertificate.ts --network ethereum_sepolia_testnet
+npx hardhat run ./scripts/deploySchoolGrades.ts --network ethereum_sepolia_testnet
 ```
 
 #### Verification
 ```sh
-npx hardhat verify --network DESIRED_NETWORK DEPLOYED_CONTRACT_ADDRESS
+npx hardhat verify --network ethereum_sepolia_testnet DEPLOYED_CONTRACT_ADDRESS
 ```
 
 #### Example with Goerli Network
