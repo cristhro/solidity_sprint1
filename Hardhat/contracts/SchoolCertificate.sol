@@ -21,7 +21,9 @@ contract SchoolCertificate {
         string memory _studentName,
         string memory _degree,
         uint _year
-    ) public onlySchool(_student) {
+    ) 
+    
+    public onlySchool(_student) {
         certificate[_student] = CertificateInfo(_studentName, _degree, _year, msg.sender);
     }
 

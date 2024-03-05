@@ -12,15 +12,18 @@ dotenv.config();
 
 const chainIds = {
   eth_goerli_id: 5,
+  eth_sepolia_id: 11155111,
   polygon_mumbai_id: 80001,
-  bsc_testnet_id: 97
+  bsc_testnet_id: 97,
 };
 
 const { //This variables must be in the .env file, in order to work (like .env.example)
   SIGNER_PRIVATE_KEY,
   ETH_GOERLI_TESTNET_RPC,
+  ETH_SEPOLIA_TESTNET_RPC,
   ETH_SCAN_API_KEY,
   ETH_GOERLI_SCAN_WEB,
+  ETH_SEPOLIA_SCAN_WEB,
   POLYGON_MUMBAI_TESTNET_RPC,
   POLYGON_SCAN_API_KEY,
   POLYGON_MUMBAI_SCAN_WEB,
@@ -49,6 +52,11 @@ const config: HardhatUserConfig = {
       chainId: chainIds.eth_goerli_id,
       accounts: SIGNER_PRIVATE_KEY !== undefined ? [SIGNER_PRIVATE_KEY] : []
     },
+     ethereum_sepolia_testnet: {
+      url: ETH_SEPOLIA_TESTNET_RPC,
+      chainId: chainIds.eth_sepolia_id,
+      accounts: SIGNER_PRIVATE_KEY !== undefined ? [SIGNER_PRIVATE_KEY] : []
+    },
     polygon_mumbai_testnet: {
       url: POLYGON_MUMBAI_TESTNET_RPC,
       chainId: chainIds.polygon_mumbai_id,
@@ -63,6 +71,7 @@ const config: HardhatUserConfig = {
   etherscan: {
     apiKey: {
         goerli: ETH_SCAN_API_KEY,
+        sepolia: ETH_SCAN_API_KEY,
         polygonMumbai: POLYGON_SCAN_API_KEY,
         bscTestnet: BSC_SCAN_API_KEY,
     }
