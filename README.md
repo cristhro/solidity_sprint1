@@ -1,4 +1,4 @@
-## Descripción de los casos de uso
+1. # Descripción de los casos de uso
 ### Casos de uso para estudiante:
 
 - Ver mis notas: El estudiante puede ver sus notas en el contrato SchoolGrades.
