@@ -6,19 +6,11 @@
 import { ethers } from "hardhat";
 
 async function main() {
-  // Hardhat always runs the compile task when running scripts with its command
-  // line interface.
-  //
-  // If this script is run directly using `node` you may want to call compile
-  // manually to make sure everything is compiled
-  // await hre.run('compile');
-
-  // We get the contract to deploy
-  const Contract = await ethers.getContractFactory("SmartContract2");
+  const Contract = await ethers.getContractFactory("SchoolCertificate");
   const contract = await Contract.deploy();
   await contract.deployed();
 
-  console.log("Contract 2 deployed to:", contract.address);
+  console.log("Contract SchoolCertificate deployed to:", contract.address);
 
 }
 

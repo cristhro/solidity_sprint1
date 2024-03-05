@@ -19,7 +19,7 @@ npx hardhat verify --network DESIRED_NETWORK DEPLOYED_CONTRACT_ADDRESS
 
 #### Example with Goerli Network
 ```sh
-npx hardhat run ./scripts/deploy.ts --network ethereum_goerli_testnet
+npx hardhat run ./scripts/deploy.ts --network ethereum_sepolia_testnet
 npx hardhat verify --network ethereum_goerli_testnet 0x...
 
 ```
