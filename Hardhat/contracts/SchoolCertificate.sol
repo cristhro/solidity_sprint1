@@ -1,6 +1,7 @@
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "./SchoolGrades.sol";
+// import "./SchoolGrades.sol";
 
 contract SchoolCertificate {
 
@@ -10,6 +11,12 @@ contract SchoolCertificate {
         string degree;
         uint year;
         address schoolAddress;
+    }
+    address public director;
+
+    // Constructor para establecer el dueño del contrato como el maestro
+    constructor() {
+        director = msg.sender;
     }
 
     // Mapping de los certificados por la dirección del estudiante
@@ -27,9 +34,9 @@ contract SchoolCertificate {
 
     // Modificador para restringir la función a la escuela del estudiante
     modifier onlySchool(address _student) {
-        SchoolGrades school = SchoolGrades(_student);
+        // SchoolGrades school = SchoolGrades(_student);
         require(
-            school.teacher() == msg.sender,
+            director == msg.sender,
             "Only the student's school can grant a diploma."
         );
         _;
