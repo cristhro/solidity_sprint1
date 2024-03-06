@@ -16,14 +16,7 @@ contract SchoolCertificate {
     mapping(address => CertificateInfo) public certificate;
 
     // Función para que la escuela otorgue un título a un estudiante
-    function grantCertificate(
-        address _student,
-        string memory _studentName,
-        string memory _degree,
-        uint _year
-    ) 
-    
-    public onlySchool(_student) {
+    function grantCertificate( address _student, string memory _studentName, string memory _degree, uint _year ) public onlySchool(_student) {
         certificate[_student] = CertificateInfo(_studentName, _degree, _year, msg.sender);
     }
 
