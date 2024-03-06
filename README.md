@@ -11,6 +11,31 @@
 
 - Agregar notas: La escuela puede agregar notas al contrato SchoolGrades.
 
+
+```sh
+npx hardhat clean
+npx hardhat compile
+npx hardhat run ./scripts/deploySchoolGrades.ts --network ethereum_sepolia_testnet
+```
+
+```sh
+Contract SchoolGrades deployed to: 0x97571d5B8A198c6AFAC497907C66F18072b232e1
+```
+
+#### Validar School Grades
+```sh
+Hardhat % npx hardhat verify --network ethereum_sepolia_testnet 0x97571d5B8A198c6AFAC497907C66F18072b232e1
+```
+
+```sh
+Successfully submitted source code for contract
+contracts/SchoolGrades.sol:SchoolGrades at 0x97571d5B8A198c6AFAC497907C66F18072b232e1
+for verification on the block explorer. Waiting for verification result...
+
+Successfully verified contract SchoolGrades on Etherscan.
+https://sepolia.etherscan.io/address/0x97571d5B8A198c6AFAC497907C66F18072b232e1#code
+```
+
 #### Casos de uso para gestor de diplomas:
 
 - Verifica elegibilidad: El contrato SchoolCertificate verifica con el contrato SchoolGrades si el estudiante es elegible para obtener un título.
