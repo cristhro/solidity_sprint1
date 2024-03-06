@@ -1,7 +1,7 @@
 import { ethers } from "hardhat";
 import { expect } from "chai"; // Import assertion library (e.g., Chai)
 
-const schoolCertificateAddress = "0x7cAC1d2Ff482Cf98804B3355Ea4A65f74aA4eDC2";
+const schoolCertificateAddress = "0xf90933f4F2C863a023408cF49301A635ecddF0d1";
 const schoolGradesAddress = "0x97571d5B8A198c6AFAC497907C66F18072b232e1"; // Replace with actual address
 
 async function main() {
