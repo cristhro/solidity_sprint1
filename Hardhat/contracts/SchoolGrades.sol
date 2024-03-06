@@ -20,14 +20,6 @@ contract SchoolGrades {
         teacher = msg.sender;
     }
 
-    // Solo el contrato Diploma puede llamar a esta función
-    modifier onlyDiploma() {
-        require(
-            msg.sender == diplomaAddress,
-            "Only the diploma contract can access this function."
-        );
-        _;
-    }
     // Modificador para restringir ciertas funciones al maestro solamente
     modifier onlyTeacher() {
         require(msg.sender == teacher, "Only the teacher can perform this action.");
