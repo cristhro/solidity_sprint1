@@ -5,7 +5,7 @@ Grupo: 15
 - Jesus Rosas Rosales
 
 ## Introducción 
-En esta practica usaremos el Smart contract SchoolGrades para gestionar  de las notas de los estudiantes  creadas por el profesor (teacher), donde los estudiantes solo podran ver sus notas, y el profesor podra crear y ver las notas de los estudiantes.
+En esta practica usaremos el Smart contract SchoolGrades para gestionar las notas de los estudiantes  creadas por el profesor (teacher), donde los estudiantes solo podran ver sus notas, y el profesor podra crear y ver las notas de los estudiantes.
 Por otro lado con el contrato SchoolCertificate un estudiante podra solicitar su titulo (certificate), pagarlo (0.02 eth cuesta el titulo) y el director una vez esta pagado el titulo podra firmarlo.
 
 
