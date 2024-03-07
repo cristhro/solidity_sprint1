@@ -18,18 +18,10 @@ const chainIds = {
 };
 
 const { //This variables must be in the .env file, in order to work (like .env.example)
-  SIGNER_PRIVATE_KEY,
-  ETH_GOERLI_TESTNET_RPC,
+  SIGNER_DIRECTOR_PRIVATE_KEY,
+  SIGNER_STUDENT_PRIVATE_KEY,
   ETH_SEPOLIA_TESTNET_RPC,
   ETH_SCAN_API_KEY,
-  ETH_GOERLI_SCAN_WEB,
-  ETH_SEPOLIA_SCAN_WEB,
-  POLYGON_MUMBAI_TESTNET_RPC,
-  POLYGON_SCAN_API_KEY,
-  POLYGON_MUMBAI_SCAN_WEB,
-  BSC_TESTNET_RPC,
-  BSC_SCAN_API_KEY,
-  BSC_TESTNET_SCAN_WEB
 } = process.env;
 
 
@@ -47,33 +39,20 @@ const config: HardhatUserConfig = {
     }
   },
   networks: {
-    ethereum_goerli_testnet: {
-      url: ETH_GOERLI_TESTNET_RPC,
-      chainId: chainIds.eth_goerli_id,
-      accounts: SIGNER_PRIVATE_KEY !== undefined ? [SIGNER_PRIVATE_KEY] : []
-    },
-     ethereum_sepolia_testnet: {
+    ethereum_sepolia_testnet_as_student: {
       url: ETH_SEPOLIA_TESTNET_RPC,
       chainId: chainIds.eth_sepolia_id,
-      accounts: SIGNER_PRIVATE_KEY !== undefined ? [SIGNER_PRIVATE_KEY] : []
+      accounts: SIGNER_STUDENT_PRIVATE_KEY !== undefined ? [SIGNER_STUDENT_PRIVATE_KEY] : []
     },
-    polygon_mumbai_testnet: {
-      url: POLYGON_MUMBAI_TESTNET_RPC,
-      chainId: chainIds.polygon_mumbai_id,
-      accounts: SIGNER_PRIVATE_KEY !== undefined ? [SIGNER_PRIVATE_KEY] : []
+     ethereum_sepolia_testnet_as_director: {
+      url: ETH_SEPOLIA_TESTNET_RPC,
+      chainId: chainIds.eth_sepolia_id,
+      accounts: SIGNER_DIRECTOR_PRIVATE_KEY !== undefined ? [SIGNER_DIRECTOR_PRIVATE_KEY] : []
     },
-    binance_bsc_testnet: {
-      url: BSC_TESTNET_RPC,
-      chainId: chainIds.bsc_testnet_id,
-      accounts: SIGNER_PRIVATE_KEY !== undefined ? [SIGNER_PRIVATE_KEY] : []
-    }
   },
   etherscan: {
     apiKey: {
-        goerli: ETH_SCAN_API_KEY,
         sepolia: ETH_SCAN_API_KEY,
-        polygonMumbai: POLYGON_SCAN_API_KEY,
-        bscTestnet: BSC_SCAN_API_KEY,
     }
   },
   mocha: {
