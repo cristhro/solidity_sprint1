@@ -1,3 +1,8 @@
+## Introducción 
+En esta practica vamos a simular la gestion de gestionar notas de asignaturas (teacher) para los estudiantes (student) mediante el contrato SchoolGrades
+Por otro lado con el contrato SchoolCertificate un estudiante podra solicitar su titulo (certificate), pagarlo (0.02 eth cuesta el titulo) y el director una vez esta pagado el titulo podra firmar el titulo o certificado.
+
+
 ## Configuración del entorno
 #### .env:
 ```sh
