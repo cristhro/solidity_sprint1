@@ -11,7 +11,7 @@ Por otro lado con el contrato SchoolCertificate un estudiante podra solicitar su
 
 ## Configuración del entorno
 - Requisitos:
-  - Tener node instalado (v20.9.0) https://nodejs.org/en/download
+  - Tener node instalado: https://nodejs.org/en/download
   - Instalar los paquetes de node una vez estas dentro del proyecto: usar el comando npm install
 
 #### .env:
