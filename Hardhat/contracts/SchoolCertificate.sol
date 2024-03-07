@@ -34,7 +34,7 @@ contract SchoolCertificate {
     // Función para que un estudiante solicite un certificado
     function requestCertificate(string memory _studentName, string memory _degree, uint _year) public {
         // Almacena la solicitud en el mapping
-        certificates[msg.sender] = CertificateInfo(_studentName, _degree, _year, false);
+        certificates[msg.sender] = CertificateInfo(_studentName, _degree, _year, false, false);
     }
 
     // Función para que un estudiante pague un certificado
