@@ -109,9 +109,9 @@ Aqui tenemos todos los scripts que estan configurados en packages.json
 
 
 ## Descripción de los casos de uso y los tests aplicados
-  ### Casos de usos:
 
-  #### Agregar notas: El profesor puede agregar notas al contrato SchoolGrades (en este caso agregamos 3 notas) [school-grades:test1].
+
+  ### Agregar notas: El profesor puede agregar notas al contrato SchoolGrades (en este caso agregamos 3 notas) [school-grades:test1].
   - Requisitos: Configurar la variable de entorno SCHOOL_GRADES_CONTRACT_ADDRESS, STUDENT_ADDRESS
   ```sh
       npm run school-grades:test1
@@ -125,7 +125,7 @@ Aqui tenemos todos los scripts que estan configurados en packages.json
     - tx2: https://sepolia.etherscan.io/tx/0xb5e5d3a45e4b2761d7797b88d6700159d1a205b1472e12e53c1540399a0f26b1
     - tx3: https://sepolia.etherscan.io/tx/0xb6643e07da904ffbf0008f6b3eb451bd31bfe07790e88e6fa1729bfe360ad1e2
       
-  #### Ver notas: El profesor puede ver las notas de un alumno. [school-grades:test2]
+  ### Ver notas: El profesor puede ver las notas de un alumno. [school-grades:test2]
   - Requisitos: Tener configurado la variable de entorno SCHOOL_GRADES_CONTRACT_ADDRESS, STUDENT_ADDRESS en .env
   ```sh
     npm run school-grades:test2
@@ -154,7 +154,7 @@ Aqui tenemos todos los scripts que estan configurados en packages.json
       ]
   ```
 
-  #### Ver mis notas: El estudiante puede ver sus notas. [school-grades:test3]
+  ### Ver mis notas: El estudiante puede ver sus notas. [school-grades:test3]
   - Requisitos: Tener configurado la variable de entorno SCHOOL_GRADES_CONTRACT_ADDRESS en .env
     ```sh
       npm run school-grades:test3   
@@ -181,7 +181,7 @@ Aqui tenemos todos los scripts que estan configurados en packages.json
       ]
     ]
     ```
-  #### Solicitar certificado: El estudiante puede solicitar un certificado al contrato SchoolCertificate. [school-certificate:test1]
+  ### Solicitar certificado: El estudiante puede solicitar un certificado al contrato SchoolCertificate. [school-certificate:test1]
   - Requisitos: Tener configurado la variable de entorno SCHOOL_CERTIFICATE_CONTRACT_ADDRESS en .env
     ```sh
       npm run school-certificate:test1 
@@ -201,7 +201,7 @@ Aqui tenemos todos los scripts que estan configurados en packages.json
     ```
   - Resultado: https://sepolia.etherscan.io/tx/0x36d7435016bafea5b7319c73150ae77c307a9321a332b0cd4b000958450fb7b8
   
-  #### Pagar certificado: El estudiante paga 0.02 ethers para obtener su certificado [school-certificate:test2].
+  ### Pagar certificado: El estudiante paga 0.02 ethers para obtener su certificado [school-certificate:test2].
    Si la cantidad coincide con el costo del certificado, paid se modifica a true.
    - Requisitos: Tener configurado la variable de entorno SCHOOL_CERTIFICATE_CONTRACT_ADDRESS en .env
    - Resultado: https://sepolia.etherscan.io/tx/0x548d2f959fa484f6e68c604ed566d26f8d6891e18ffef9c4f6b55bed30cc8e42
@@ -221,7 +221,7 @@ Aqui tenemos todos los scripts que estan configurados en packages.json
             granted: false
           ]
       ```
-  #### Ver solicitud: Como estudiante puedo consultar si mi solicitud ha sido aprobada (granted). [school-certificate:test3].
+  ### Ver solicitud: Como estudiante puedo consultar si mi solicitud ha sido aprobada (granted). [school-certificate:test3].
    - Requisitos: Tener configurado la variable de entorno SCHOOL_CERTIFICATE_CONTRACT_ADDRESS en .env
      ```sh
         npm run school-certificate:test3
@@ -239,7 +239,7 @@ Aqui tenemos todos los scripts que estan configurados en packages.json
             granted: false
           ]
     ```
-  #### Firmar certificado: El director firmara el certificado, haciendo una comprobación de las notas del alumno
+  ### Firmar certificado: El director firmara el certificado, haciendo una comprobación de las notas del alumno
   Depende de el contrato School Grades para validar que las asignaturas han sido aprobadas (>5)
   Devuelve un error "El estudiante debe haber pasado todas sus materias" si no se cumple esta funcion hasPassedAllSubjects
   
