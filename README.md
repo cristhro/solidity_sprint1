@@ -53,10 +53,9 @@ Aqui hemos configurado una red para cada cuenta de cada usuario (student, direct
 #### packages.json:
 Pre configuración antes ejecutar los test,  el order para ejecutar es importante (Ya que SchoolCertificate depende de SchoolGrades ): 
 1. Primero hacer deploy de school-grades:deploy 
-Resulta: dirección del contrato School Grades
+Resultado: [dirección del contrato School Grades](https://sepolia.etherscan.io/address/0x34d1bF50ed85513e47995Cde2D55D1b5C2481839)
 ```sh
   npm run school-grades:deploy
-  -> 0x34d1bF50ed85513e47995Cde2D55D1b5C2481839
 ```
 
 2. Verificar el contrato School Grades
