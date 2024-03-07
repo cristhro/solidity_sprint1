@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+import "./SchoolGrades.sol";
 
 contract SchoolCertificate {
 
@@ -16,10 +17,12 @@ contract SchoolCertificate {
     mapping(address => CertificateInfo) public certificates;
     uint public certificatePrice = 0.02 ether; // Precio del certificado
     address payable public director;
-    
+    SchoolGrades public schoolGrades; // Nueva variable para almacenar la dirección del contrato SchoolGrades
+
     // Constructor para establecer el dueño del contrato como el maestro
-    constructor() {
+    constructor(address _schoolGrades) {
         director = payable(msg.sender);
+        schoolGrades = SchoolGrades(_schoolGrades);
     }
 
     // Modificador para restringir la función a la escuela del estudiante
@@ -50,6 +53,7 @@ contract SchoolCertificate {
     function grantCertificate(address _student) public {
         require(msg.sender == director, "Solo el director puede otorgar certificados");
         require(certificates[_student].paid == true, "El estudiante debe pagar el certificado antes de que se le otorgue");
+        require(schoolGrades.hasPassedAllSubjects(_student), "El estudiante debe haber pasado todas sus materias");
 
         // Transfiere el pago del certificado a la cuenta del director
         director.transfer(certificatePrice);

@@ -4,6 +4,11 @@
   "author": "Alexander Herranz",
   "scripts": {
     "compile": "hardhat compile",
+    "school-grades:deploy": "hardhat run scripts/schoolGrades/deploy.ts --network ethereum_sepolia_testnet_as_teacher  ",
+    "school-grades:verify": "hardhat verify  --network ethereum_sepolia_testnet_as_teacher  ",
+    "school-grades:test1": "hardhat run scripts/schoolGrades/test1_teacher_add_grades_to_student.ts --network ethereum_sepolia_testnet_as_teacher",
+    "school-grades:test2": "hardhat run scripts/schoolGrades/test2_teacher_view_grades.ts --network ethereum_sepolia_testnet_as_teacher",
+    "school-grades:test3": "hardhat run scripts/schoolGrades/test3_student_view_my_grades.ts --network ethereum_sepolia_testnet_as_student",
     "school-certificate:deploy": "hardhat run scripts/schoolCertificate/deploy.ts --network ethereum_sepolia_testnet_as_director  ",
     "school-certificate:verify": "hardhat verify  --network ethereum_sepolia_testnet_as_director  ",
     "school-certificate:test1": "hardhat run scripts/schoolCertificate/test1_student_request_certificate.ts --network ethereum_sepolia_testnet_as_student",

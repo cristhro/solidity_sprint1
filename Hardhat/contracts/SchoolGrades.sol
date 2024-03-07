@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+
 contract SchoolGrades {
     // Estructura para almacenar la información de una materia y la nota de un alumno
     struct SubjectGrade {
@@ -41,5 +42,16 @@ contract SchoolGrades {
     // Solo puede ser llamada por el maestro
     function viewStudentGrades(address _student) public view onlyTeacher returns (SubjectGrade[] memory) {
         return studentGrades[_student];
+    }
+
+        // Función para verificar si un estudiante ha pasado todas sus materias
+    function hasPassedAllSubjects(address _student) public view returns (bool) {
+        SubjectGrade[] memory grades = studentGrades[_student];
+        for (uint i = 0; i < grades.length; i++) {
+            if (grades[i].grade < 5) { // Asume que 5 es la nota mínima para pasar
+                return false;
+            }
+        }
+        return true;
     }
 }

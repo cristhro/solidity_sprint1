@@ -1,4 +1,5 @@
 import * as dotenv from "dotenv";
+dotenv.config();
 
 import { HardhatUserConfig, task } from "hardhat/config";
 import "@nomiclabs/hardhat-etherscan";
@@ -8,7 +9,6 @@ import "hardhat-gas-reporter";
 import "solidity-coverage";
 /* import "@openzeppelin/hardhat-upgrades"; */
 
-dotenv.config();
 
 const chainIds = {
   eth_goerli_id: 5,
@@ -20,6 +20,7 @@ const chainIds = {
 const { //This variables must be in the .env file, in order to work (like .env.example)
   SIGNER_DIRECTOR_PRIVATE_KEY,
   SIGNER_STUDENT_PRIVATE_KEY,
+  SIGNER_TEACHER_PRIVATE_KEY,
   ETH_SEPOLIA_TESTNET_RPC,
   ETH_SCAN_API_KEY,
 } = process.env;
@@ -44,10 +45,15 @@ const config: HardhatUserConfig = {
       chainId: chainIds.eth_sepolia_id,
       accounts: SIGNER_STUDENT_PRIVATE_KEY !== undefined ? [SIGNER_STUDENT_PRIVATE_KEY] : []
     },
-     ethereum_sepolia_testnet_as_director: {
+    ethereum_sepolia_testnet_as_director: {
       url: ETH_SEPOLIA_TESTNET_RPC,
       chainId: chainIds.eth_sepolia_id,
       accounts: SIGNER_DIRECTOR_PRIVATE_KEY !== undefined ? [SIGNER_DIRECTOR_PRIVATE_KEY] : []
+    },
+    ethereum_sepolia_testnet_as_teacher: {
+      url: ETH_SEPOLIA_TESTNET_RPC,
+      chainId: chainIds.eth_sepolia_id,
+      accounts: SIGNER_TEACHER_PRIVATE_KEY !== undefined ? [SIGNER_TEACHER_PRIVATE_KEY] : []
     },
   },
   etherscan: {

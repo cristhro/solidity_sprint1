@@ -1,11 +1,10 @@
 import { ethers } from "hardhat";
 import { expect } from "chai"; // Import assertion library (e.g., Chai)
 
-const schoolCertificateAddress = "0xD5bbD62C24dAF214fAcDC2EA7E0d1c7d0970A8B0";
-const _student4Address = "0x664f16E7dC4F28fF1748aD70E3cf228F7D6E66FB"; // Replace with actual address
+const { SCHOOL_CERTIFICATE_CONTRACT_ADDRESS } = process.env;
 
 async function main() {
-  const schoolCertificateContract = await ethers.getContractAt('SchoolCertificate', schoolCertificateAddress);
+  const schoolCertificateContract = await ethers.getContractAt('SchoolCertificate', SCHOOL_CERTIFICATE_CONTRACT_ADDRESS);
 
   // Estudiante ve el estado del certificado
   const certificate = await schoolCertificateContract.viewCertificate();
