@@ -47,7 +47,7 @@ Aqui hemos configurado una red para con la cuenta para cada usuario (student, di
 ```
 
 #### packages.json:
-Aqui se pueden ver los scripts, el order para ejecutar es importante: 
+Pre configuración antes ejecutar los test,  el order para ejecutar es importante (Ya que SchoolCertificate depende de SchoolGrades ): 
 1. Primero hacer deploy de school-grades:deploy 
 Resulta: dirección del contrato School Grades
 ```sh
