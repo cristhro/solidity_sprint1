@@ -10,6 +10,7 @@ contract SchoolCertificate {
         string degree;
         uint year;
         bool paid;
+        bool granted; // Nuevo campo para indicar si se ha otorgado el certificado
     }
     
     mapping(address => CertificateInfo) public certificates;
@@ -52,6 +53,9 @@ contract SchoolCertificate {
 
         // Transfiere el pago del certificado a la cuenta del director
         director.transfer(certificatePrice);
+
+        // Marca el certificado como otorgado
+        certificates[_student].granted = true;
     }
 
     // Función para que un estudiante vea su diploma
