@@ -1,69 +1,240 @@
-## Descripción de los casos de uso
+## Configuración del entorno
+#### .env:
+```sh
+SIGNER_DIRECTOR_PRIVATE_KEY = ''
+SIGNER_STUDENT_PRIVATE_KEY = ''
+SIGNER_TEACHER_PRIVATE_KEY = ''
+SCHOOL_GRADES_CONTRACT_ADDRESS = 0x34d1bF50ed85513e47995Cde2D55D1b5C2481839 ('TOBE CONFIGURED AFTER run script school-grades:deploy')
+SCHOOL_CERTIFICATE_CONTRACT_ADDRESS = 0x50cB8A98c6a468adCF4A7e6CCe28e8DebA34D3F3 ('TOBE CONFIGURED AFTER run script school-certificate:deploy')
+STUDENT_ADDRESS = 0x664f16E7dC4F28fF1748aD70E3cf228F7D6E66FB
+
+ETH_SEPOLIA_TESTNET_RPC = https://ethereum-sepolia.blockpi.network/v1/rpc/public
+ETH_SCAN_API_KEY = ''
+ETH_SEPOLIA_SCAN_WEB = https://sepolia.etherscan.io/
+
+```
+#### hardhat.config.ts:
+Aqui hemos configurado una red para con la cuenta para cada usuario (student, director, teacher)
+```sh
+  networks: {
+    ethereum_sepolia_testnet_as_student: {
+      url: ETH_SEPOLIA_TESTNET_RPC,
+      chainId: chainIds.eth_sepolia_id,
+      accounts: SIGNER_STUDENT_PRIVATE_KEY !== undefined ? [SIGNER_STUDENT_PRIVATE_KEY] : []
+    },
+    ethereum_sepolia_testnet_as_director: {
+      url: ETH_SEPOLIA_TESTNET_RPC,
+      chainId: chainIds.eth_sepolia_id,
+      accounts: SIGNER_DIRECTOR_PRIVATE_KEY !== undefined ? [SIGNER_DIRECTOR_PRIVATE_KEY] : []
+    },
+    ethereum_sepolia_testnet_as_teacher: {
+      url: ETH_SEPOLIA_TESTNET_RPC,
+      chainId: chainIds.eth_sepolia_id,
+      accounts: SIGNER_TEACHER_PRIVATE_KEY !== undefined ? [SIGNER_TEACHER_PRIVATE_KEY] : []
+    },
+  },
+```
+
+#### packages.json:
+Aqui se pueden ver los scripts, el order para ejecutar es importante: 
+1. Primero hacer deploy de school-grades:deploy 
+Resulta: dirección del contrato School Grades
+```sh
+  npm run school-grades:deploy
+  -> 0x34d1bF50ed85513e47995Cde2D55D1b5C2481839
+```
+
+2. Verificar el contrato School Grades
+```sh
+  npm run school-grades:verify 0x34d1bF50ed85513e47995Cde2D55D1b5C2481839
+  -> Successfully verified contract SchoolGrades on Etherscan.
+  https://sepolia.etherscan.io/address/0x34d1bF50ed85513e47995Cde2D55D1b5C2481839#code
+```
+
+3. Configurar la variable de entorno en .env
+```sh
+  SCHOOL_GRADES_CONTRACT_ADDRESS=0x34d1bF50ed85513e47995Cde2D55D1b5C2481839
+```
+4. Hacer deploy de school-certificate:deploy (require la variable de entorno SCHOOL_GRADES_CONTRACT_ADDRESS ya que lo usa en el constructor del contrato)
+```sh
+   npm run school-certificate:deploy
+  -> 0x50cB8A98c6a468adCF4A7e6CCe28e8DebA34D3F3
+```
+5. Verificar el contrato School Certificate
+```sh
+   npm run school-certificate:verify 0x50cB8A98c6a468adCF4A7e6CCe28e8DebA34D3F3 "0x34d1bF50ed85513e47995Cde2D55D1b5C2481839"
+  -> Successfully submitted source code for contract
+contracts/SchoolCertificate.sol:SchoolCertificate at 0x50cB8A98c6a468adCF4A7e6CCe28e8DebA34D3F3
+```
+7. Configurar la variable de entorno en .env
+```sh
+  SCHOOL_CERTIFICATE_CONTRACT_ADDRESS=0x50cB8A98c6a468adCF4A7e6CCe28e8DebA34D3F3
+```
+
+Con esto configurado ya se pueden ejecutar los scripts de test ✅
+
+Aqui tenemos todos los scripts
+```sh
+"scripts": {
+    "compile": "hardhat compile",
+    "school-grades:deploy": "hardhat run scripts/schoolGrades/deploy.ts --network ethereum_sepolia_testnet_as_teacher  ",
+    "school-grades:verify": "hardhat verify  --network ethereum_sepolia_testnet_as_teacher ",
+    "school-grades:test1": "hardhat run scripts/schoolGrades/test1_teacher_add_grades_to_student.ts --network ethereum_sepolia_testnet_as_teacher",
+    "school-grades:test2": "hardhat run scripts/schoolGrades/test2_teacher_view_grades.ts --network ethereum_sepolia_testnet_as_teacher",
+    "school-grades:test3": "hardhat run scripts/schoolGrades/test3_student_view_my_grades.ts --network ethereum_sepolia_testnet_as_student",
+    "school-certificate:deploy": "hardhat run scripts/schoolCertificate/deploy.ts --network ethereum_sepolia_testnet_as_director  ",
+    "school-certificate:verify": "hardhat verify  --network ethereum_sepolia_testnet_as_director ",
+    "school-certificate:test1": "hardhat run scripts/schoolCertificate/test1_student_request_certificate.ts --network ethereum_sepolia_testnet_as_student",
+    "school-certificate:test2": "hardhat run scripts/schoolCertificate/test2_student_pay_certificate.ts --network ethereum_sepolia_testnet_as_student",
+    "school-certificate:test3": "hardhat run scripts/schoolCertificate/test3_student_view_certificate.ts --network ethereum_sepolia_testnet_as_student",
+    "school-certificate:test4": "hardhat run scripts/schoolCertificate/test4_director_grant_certificate.ts --network ethereum_sepolia_testnet_as_director",
+    "school-certificate:test5": "hardhat run scripts/schoolCertificate/test5_student_view_certificate.ts --network ethereum_sepolia_testnet_as_student"
+-
+```
+
+
+## Descripción de los casos de uso y los test aplicados
 #### Casos de uso para estudiante:
+- Agregar notas: El profesor puede agregar notas al contrato SchoolGrades (en este caso agregamos 3 notas) [school-grades:test1].
+  Requisitos: Configurar la variable de entorno SCHOOL_GRADES_CONTRACT_ADDRESS, STUDENT_ADDRESS
+  ```sh
+    npm run school-grades:test1
+    > hardhat run scripts/schoolGrades/test1_teacher_add_grades_to_student.ts --network ethereum_sepolia_testnet_as_teacher
+    > tx1 [Ethereum: Clientes y transacciones = 7] Grades for 0x664f16E7dC4F28fF1748aD70E3cf228F7D6E66FB
+    -> Hash de la transacción: '0x907de3f6af5324ce8e977e09bd9e9dc95632c4af7779ddfaf1baae75583ff5ff'
+    > tx2 [Tecnología Blockchain = 10] Grades for 0x664f16E7dC4F28fF1748aD70E3cf228F7D6E66FB  
+    -> Hash de la transacción: '0xb5e5d3a45e4b2761d7797b88d6700159d1a205b1472e12e53c1540399a0f26b1'
+    > tx3 [Ecosistema Blockchain = 8] Grades for 0x664f16E7dC4F28fF1748aD70E3cf228F7D6E66FB  
+    -> Hash de la transacción: '0xb6643e07da904ffbf0008f6b3eb451bd31bfe07790e88e6fa1729bfe360ad1e2'
+  ```
+- Ver notas: El profesor puede ver las notas de un alumno. [school-grades:test2]
+    Requisitos: Configurar la variable de entorno SCHOOL_GRADES_CONTRACT_ADDRESS, STUDENT_ADDRESS
+  ```sh
+    npm run school-grades:test2
+    > hardhat run scripts/schoolGrades/test2_student_view_grades.ts --network ethereum_sepolia_testnet_as_teacher
 
-- Ver mis notas: El estudiante puede ver sus notas en el contrato SchoolGrades.
-- Solicitar certificado: El estudiante puede solicitar un certificado al contrato SchoolCertificate.
-- Verifica elegibilidad: El contrato SchoolCertificate verifica con el contrato SchoolGrades si el estudiante es elegible para obtener un título.
-- Otorga diploma: Si el estudiante es elegible, el contrato SchoolCertificate le otorga un título.
-- Mostrar diploma: El estudiante puede ver su certificado en el contrato SchoolCertificate.
-
-#### Casos de uso para escuela/universidad:
-
-- Agregar notas: La escuela puede agregar notas al contrato SchoolGrades.
-
-
-```sh
-npx hardhat clean
-npx hardhat compile
-npx hardhat run ./scripts/deploySchoolGrades.ts --network ethereum_sepolia_testnet
-```
-
-```sh
-Contract SchoolGrades deployed to: 0x97571d5B8A198c6AFAC497907C66F18072b232e1
-```
-
-#### Validar School Grades
-```sh
-Hardhat % npx hardhat verify --network ethereum_sepolia_testnet 0x97571d5B8A198c6AFAC497907C66F18072b232e1
-```
-
-```sh
-Successfully submitted source code for contract
-contracts/SchoolGrades.sol:SchoolGrades at 0x97571d5B8A198c6AFAC497907C66F18072b232e1
-for verification on the block explorer. Waiting for verification result...
-
-Successfully verified contract SchoolGrades on Etherscan.
-https://sepolia.etherscan.io/address/0x97571d5B8A198c6AFAC497907C66F18072b232e1#code
-```
-
-#### Casos de uso para gestor de diplomas:
-
-- Verifica elegibilidad: El contrato SchoolCertificate verifica con el contrato SchoolGrades si el estudiante es elegible para obtener un título.
-- Otorga diploma: Si el estudiante es elegible, el contrato Diploma le otorga un título.
-
-
-```sh
-npx hardhat clean
-npx hardhat compile
-npx hardhat run ./scripts/deploySchoolCertificate.ts --network ethereum_sepolia_testnet
-```
-
-```sh
-Contract SchoolCertificate deployed to: 0x7cAC1d2Ff482Cf98804B3355Ea4A65f74aA4eDC2
-```
-
-#### Validar School Certificate
-```sh
-Hardhat % npx hardhat verify --network ethereum_sepolia_testnet 0x7cAC1d2Ff482Cf98804B3355Ea4A65f74aA4eDC2
-```
-
-```sh
-Successfully submitted source code for contract
-contracts/SchoolCertificate.sol:SchoolCertificate at 0x7cAC1d2Ff482Cf98804B3355Ea4A65f74aA4eDC2
-for verification on the block explorer. Waiting for verification result...
-
-Successfully verified contract SchoolCertificate on Etherscan.
-https://sepolia.etherscan.io/address/0x7cAC1d2Ff482Cf98804B3355Ea4A65f74aA4eDC2#code
-```
-
-
+    > Grades for 0x664f16E7dC4F28fF1748aD70E3cf228F7D6E66FB  
+       [
+        [
+          'Ethereum: Clientes y transacciones',
+          BigNumber { value: "7" },
+          subjectName: 'Ethereum: Clientes y transacciones',
+          grade: BigNumber { value: "7" }
+        ],
+        [
+          'Tecnología Blockchain',
+          BigNumber { value: "10" },
+          subjectName: 'Tecnología Blockchain',
+          grade: BigNumber { value: "10" }
+        ],
+        [
+          'Ecosistema Blockchain',
+          BigNumber { value: "8" },
+          subjectName: 'Ecosistema Blockchain',
+          grade: BigNumber { value: "8" }
+        ]
+      ]
+  ```
+- Ver mis notas: El estudiante puede ver sus notas. [school-grades:test3]
+  ```sh
+    npm run school-grades:test3   
+    > hardhat run scripts/schoolGrades/test3_student_view_my_grades.ts --network ethereum_sepolia_testnet_as_student
+    > My Grades for 0x664f16E7dC4F28fF1748aD70E3cf228F7D6E66FB  
+   [
+    [
+      'Ethereum: Clientes y transacciones',
+      BigNumber { value: "7" },
+      subjectName: 'Ethereum: Clientes y transacciones',
+      grade: BigNumber { value: "7" }
+    ],
+    [
+      'Tecnología Blockchain',
+      BigNumber { value: "10" },
+      subjectName: 'Tecnología Blockchain',
+      grade: BigNumber { value: "10" }
+    ],
+    [
+      'Ecosistema Blockchain',
+      BigNumber { value: "8" },
+      subjectName: 'Ecosistema Blockchain',
+      grade: BigNumber { value: "8" }
+    ]
+  ]
+  ```
+- Solicitar certificado: El estudiante puede solicitar un certificado al contrato SchoolCertificate. [school-certificate:test1]
+  Esta funcion crea el la estructura:
+  
+  ```sh
+    npm run school-certificate:test1 
+    > hardhat run scripts/schoolCertificate/test1_student_request_certificate.ts --network ethereum_sepolia_testnet_as_student
+    > certificate : [
+      'Juan',
+      'Tecnología Blockchain',
+      BigNumber { value: "2023" },
+      false,
+      false,
+      studentName: 'Juan',
+      degree: 'Tecnología Blockchain',
+      year: BigNumber { value: "2023" },
+      paid: false,
+      granted: false
+    ]
+    -> Hash de la transacción: TO CHECK
+  ```
+- Pagar certificado: El estudiante paga 0.02 ethers para obtener su certificado [school-certificate:test2].
+ Si la cantidad coincide con el costo del certificado, paid se modifica a true.
+ ```sh
+    npm run school-certificate:test2
+    > hardhat run scripts/schoolCertificate/test2_student_pay_certificate.ts --network ethereum_sepolia_testnet_as_student
+    > certificate : [
+      'Juan',
+      'Tecnología Blockchain',
+      BigNumber { value: "2023" },
+      true,
+      false,
+      studentName: 'Juan',
+      degree: 'Tecnología Blockchain',
+      year: BigNumber { value: "2023" },
+      paid: true, <-- ESTO CAMBIA 
+      granted: false
+    ]
+    -> Hash de la transacción: TO CHECK
+  ```
+- Ver solicitud: Como estudiante puedo consultar si mi solicitud ha sido aprobada (granted). [school-certificate:test3].
+ ```sh
+    npm run school-certificate:test3
+    > hardhat run scripts/schoolCertificate/test3_student_view_certificate.ts --network ethereum_sepolia_testnet_as_student
+    > certificate : [
+  'Juan',
+  'Tecnología Blockchain',
+  BigNumber { value: "2023" },
+  true,
+  false,
+  studentName: 'Juan',
+  degree: 'Tecnología Blockchain',
+  year: BigNumber { value: "2023" },
+  paid: true,
+  granted: false
+]
+  ```
+- Firmar certificado: El director firmara el certificado, haciendo una comprobación de las notas del alumno
+  Depende de el contrato School Grades para validar que las asignaturas han sido aprobadas (>5)
+  Devuelve un error "El estudiante debe haber pasado todas sus materias" si no se cumple esta funcion hasPassedAllSubjects
+ ```sh
+    npm run school-certificate:test4
+    > hardhat run scripts/schoolCertificate/test4_director_grant_certificate.ts --network ethereum_sepolia_testnet_as_director
+  certificate : [
+    'Juan',
+    'Tecnología Blockchain',
+    BigNumber { value: "2023" },
+    true,
+    false,
+    studentName: 'Juan',
+    degree: 'Tecnología Blockchain',
+    year: BigNumber { value: "2023" },
+    paid: true,
+    granted: true <--- ESTO CAMBIA
+  ]
+   -> Hash de la transacción: TO CHECK
+]
+  ```
