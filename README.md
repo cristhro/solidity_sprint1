@@ -25,7 +25,7 @@ ETH_SEPOLIA_SCAN_WEB = https://sepolia.etherscan.io/
 
 ```
 #### hardhat.config.ts:
-Aqui hemos configurado una red para con la cuenta para cada usuario (student, director, teacher)
+Aqui hemos configurado una red para cada cuenta de cada usuario (student, director, teacher)
 ```sh
   networks: {
     ethereum_sepolia_testnet_as_student: {
