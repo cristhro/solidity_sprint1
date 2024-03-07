@@ -1,6 +1,6 @@
 # IEBS
 Sprint 1 - Programación de un primer Smart Contract
-Grupo: 15
+- Grupo: 15
 - Cristhian Rodriguez Gomez
 - Jesus Rosas Rosales
 
