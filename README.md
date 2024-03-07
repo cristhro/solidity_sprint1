@@ -110,19 +110,20 @@ Aqui tenemos todos los scripts
 ## Descripción de los casos de uso y los test aplicados
 #### Casos de uso para estudiante:
 - Agregar notas: El profesor puede agregar notas al contrato SchoolGrades (en este caso agregamos 3 notas) [school-grades:test1].
-  Requisitos: Configurar la variable de entorno SCHOOL_GRADES_CONTRACT_ADDRESS, STUDENT_ADDRESS
+  - Requisitos: Configurar la variable de entorno SCHOOL_GRADES_CONTRACT_ADDRESS, STUDENT_ADDRESS
+  - Transacciones: 
+    - tx1: https://sepolia.etherscan.io/tx/0x907de3f6af5324ce8e977e09bd9e9dc95632c4af7779ddfaf1baae75583ff5ff
+    - tx2: https://sepolia.etherscan.io/tx/0xb5e5d3a45e4b2761d7797b88d6700159d1a205b1472e12e53c1540399a0f26b1
+    - tx3: https://sepolia.etherscan.io/tx/0xb6643e07da904ffbf0008f6b3eb451bd31bfe07790e88e6fa1729bfe360ad1e2
   ```sh
     npm run school-grades:test1
     > hardhat run scripts/schoolGrades/test1_teacher_add_grades_to_student.ts --network ethereum_sepolia_testnet_as_teacher
     > tx1 [Ethereum: Clientes y transacciones = 7] Grades for 0x664f16E7dC4F28fF1748aD70E3cf228F7D6E66FB
-    -> Hash de la transacción: '0x907de3f6af5324ce8e977e09bd9e9dc95632c4af7779ddfaf1baae75583ff5ff'
     > tx2 [Tecnología Blockchain = 10] Grades for 0x664f16E7dC4F28fF1748aD70E3cf228F7D6E66FB  
-    -> Hash de la transacción: '0xb5e5d3a45e4b2761d7797b88d6700159d1a205b1472e12e53c1540399a0f26b1'
     > tx3 [Ecosistema Blockchain = 8] Grades for 0x664f16E7dC4F28fF1748aD70E3cf228F7D6E66FB  
-    -> Hash de la transacción: '0xb6643e07da904ffbf0008f6b3eb451bd31bfe07790e88e6fa1729bfe360ad1e2'
   ```
 - Ver notas: El profesor puede ver las notas de un alumno. [school-grades:test2]
-    Requisitos: Configurar la variable de entorno SCHOOL_GRADES_CONTRACT_ADDRESS, STUDENT_ADDRESS
+    - Requisitos: Configurar la variable de entorno SCHOOL_GRADES_CONTRACT_ADDRESS, STUDENT_ADDRESS
   ```sh
     npm run school-grades:test2
     > hardhat run scripts/schoolGrades/test2_student_view_grades.ts --network ethereum_sepolia_testnet_as_teacher
