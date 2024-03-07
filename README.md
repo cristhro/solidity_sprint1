@@ -111,7 +111,7 @@ Aqui tenemos todos los scripts
 #### Casos de uso para estudiante:
 - Agregar notas: El profesor puede agregar notas al contrato SchoolGrades (en este caso agregamos 3 notas) [school-grades:test1].
   - Requisitos: Configurar la variable de entorno SCHOOL_GRADES_CONTRACT_ADDRESS, STUDENT_ADDRESS
-  - Transacciones: 
+  - Resultado: 
     - tx1: https://sepolia.etherscan.io/tx/0x907de3f6af5324ce8e977e09bd9e9dc95632c4af7779ddfaf1baae75583ff5ff
     - tx2: https://sepolia.etherscan.io/tx/0xb5e5d3a45e4b2761d7797b88d6700159d1a205b1472e12e53c1540399a0f26b1
     - tx3: https://sepolia.etherscan.io/tx/0xb6643e07da904ffbf0008f6b3eb451bd31bfe07790e88e6fa1729bfe360ad1e2
@@ -151,7 +151,7 @@ Aqui tenemos todos los scripts
       ]
   ```
 - Ver mis notas: El estudiante puede ver sus notas. [school-grades:test3]
-    Requisitos: Configurar la variable de entorno SCHOOL_GRADES_CONTRACT_ADDRESS
+  - Requisitos: Configurar la variable de entorno SCHOOL_GRADES_CONTRACT_ADDRESS
 
   ```sh
     npm run school-grades:test3   
@@ -179,8 +179,8 @@ Aqui tenemos todos los scripts
   ]
   ```
 - Solicitar certificado: El estudiante puede solicitar un certificado al contrato SchoolCertificate. [school-certificate:test1]
-  Requisitos: Configurar la variable de entorno SCHOOL_CERTIFICATE_CONTRACT_ADDRESS
-  
+  - Requisitos: Configurar la variable de entorno SCHOOL_CERTIFICATE_CONTRACT_ADDRESS
+  - Resultado: https://sepolia.etherscan.io/tx/0x36d7435016bafea5b7319c73150ae77c307a9321a332b0cd4b000958450fb7b8
   ```sh
     npm run school-certificate:test1 
     > hardhat run scripts/schoolCertificate/test1_student_request_certificate.ts --network ethereum_sepolia_testnet_as_student
@@ -196,11 +196,11 @@ Aqui tenemos todos los scripts
       paid: false,
       granted: false
     ]
-    -> Hash de la transacción: https://sepolia.etherscan.io/tx/0x36d7435016bafea5b7319c73150ae77c307a9321a332b0cd4b000958450fb7b8
   ```
 - Pagar certificado: El estudiante paga 0.02 ethers para obtener su certificado [school-certificate:test2].
  Si la cantidad coincide con el costo del certificado, paid se modifica a true.
-Requisitos: Configurar la variable de entorno SCHOOL_CERTIFICATE_CONTRACT_ADDRESS
+ - Requisitos: Configurar la variable de entorno SCHOOL_CERTIFICATE_CONTRACT_ADDRESS
+ - Resultado: https://sepolia.etherscan.io/tx/0x548d2f959fa484f6e68c604ed566d26f8d6891e18ffef9c4f6b55bed30cc8e42
  ```sh
     npm run school-certificate:test2
     > hardhat run scripts/schoolCertificate/test2_student_pay_certificate.ts --network ethereum_sepolia_testnet_as_student
@@ -216,10 +216,9 @@ Requisitos: Configurar la variable de entorno SCHOOL_CERTIFICATE_CONTRACT_ADDRES
       paid: true, <-- ESTO CAMBIA 
       granted: false
     ]
-    -> Hash de la transacción: https://sepolia.etherscan.io/tx/0x548d2f959fa484f6e68c604ed566d26f8d6891e18ffef9c4f6b55bed30cc8e42
   ```
 - Ver solicitud: Como estudiante puedo consultar si mi solicitud ha sido aprobada (granted). [school-certificate:test3].
-Requisitos: Configurar la variable de entorno SCHOOL_CERTIFICATE_CONTRACT_ADDRESS
+ - Requisitos: Configurar la variable de entorno SCHOOL_CERTIFICATE_CONTRACT_ADDRESS
  ```sh
     npm run school-certificate:test3
     > hardhat run scripts/schoolCertificate/test3_student_view_certificate.ts --network ethereum_sepolia_testnet_as_student
@@ -239,7 +238,8 @@ Requisitos: Configurar la variable de entorno SCHOOL_CERTIFICATE_CONTRACT_ADDRES
 - Firmar certificado: El director firmara el certificado, haciendo una comprobación de las notas del alumno
   Depende de el contrato School Grades para validar que las asignaturas han sido aprobadas (>5)
   Devuelve un error "El estudiante debe haber pasado todas sus materias" si no se cumple esta funcion hasPassedAllSubjects
-  Requisitos: Configurar la variable de entorno SCHOOL_CERTIFICATE_CONTRACT_ADDRESS y STUDENT_ADDRESS
+  - Requisitos: Configurar la variable de entorno SCHOOL_CERTIFICATE_CONTRACT_ADDRESS y STUDENT_ADDRESS
+  - Resultado: https://sepolia.etherscan.io/tx/0x741bbfca7b86c5b5ad27d8b2fc1e538ce79d02044dd8d8ab3f21a9347a358ed0
  ```sh
     npm run school-certificate:test4
     > hardhat run scripts/schoolCertificate/test4_director_grant_certificate.ts --network ethereum_sepolia_testnet_as_director
@@ -255,6 +255,5 @@ Requisitos: Configurar la variable de entorno SCHOOL_CERTIFICATE_CONTRACT_ADDRES
     paid: true,
     granted: true <--- ESTO CAMBIA
   ]
-   -> Hash de la transacción: https://sepolia.etherscan.io/tx/0x741bbfca7b86c5b5ad27d8b2fc1e538ce79d02044dd8d8ab3f21a9347a358ed0
 ]
   ```
