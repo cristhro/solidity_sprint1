@@ -51,7 +51,7 @@ Aqui hemos configurado una red para cada cuenta de cada usuario (student, direct
 ```
 
 #### packages.json:
-Pre configuración antes ejecutar los test,  el order para ejecutar es importante (Ya que SchoolCertificate depende de SchoolGrades ): 
+Pre configuración antes ejecutar los scripts tests, el order para ejecutar es importante (Ya que SchoolCertificate depende de SchoolGrades ): 
 1. Primero hacer deploy de school-grades:deploy 
 Resultado: [dirección del contrato School Grades](https://sepolia.etherscan.io/address/0x34d1bF50ed85513e47995Cde2D55D1b5C2481839)
 ```sh
