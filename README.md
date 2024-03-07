@@ -108,7 +108,7 @@ Aqui tenemos todos los scripts que estan configurados en packages.json
   ```
 
 
-## Descripción de los casos de uso y los test aplicados
+## Descripción de los casos de uso y los tests aplicados
   ### Casos de usos:
 
   #### Agregar notas: El profesor puede agregar notas al contrato SchoolGrades (en este caso agregamos 3 notas) [school-grades:test1].
